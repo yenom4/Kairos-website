@@ -116,7 +116,7 @@ const Contact = () => {
               </div>
               
               <div className="mt-auto pt-4">
-                <CalPopupButton />
+                <CalPopupButton className="w-full" />
               </div>
             </div>
           </div>

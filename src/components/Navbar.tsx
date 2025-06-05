@@ -36,7 +36,7 @@ const Navbar = () => {
         e.preventDefault();
         scrollToTop();
       }} aria-label="Pulse Robot">
-          <img alt="Pulse Robot Logo" src="/lovable-uploads/58801a28-df62-461f-9ecb-4b2da63db2e1.png" className="h-7 sm:h-8 object-contain" />
+          <img alt="Kairos Logo" src="/Kairos noir.svg" className="h-7 sm:h-8 object-contain" />
         </a>
 
         {/* Desktop Navigation */}

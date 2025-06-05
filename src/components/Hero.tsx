@@ -135,7 +135,7 @@ const Hero = () => {
                     
                     {/* Statue image with subtle glow */}
                     <div className="relative">
-                      <img ref={imageRef} src="/lovable-uploads/eff7d43b-f6c8-431c-a573-5678412b3267.png" alt="Classical Statue" className="w-full h-auto object-contain transition-transform duration-500 ease-out rounded-xl relative z-10" style={{
+                      <img ref={imageRef} src="/hero-statue.png" alt="Classical Statue" className="w-full h-auto object-contain transition-transform duration-500 ease-out rounded-xl relative z-10" style={{
                     transformStyle: 'preserve-3d',
                     maxHeight: '500px',
                     filter: 'drop-shadow(0 0 15px rgba(255, 107, 53, 0.3))'
