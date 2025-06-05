@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import CalPopupButton from "./CalPopupButton";
 
-const DetailsSection = () => {
+const Contact = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     email: "",
@@ -205,4 +205,4 @@ const DetailsSection = () => {
     </section>;
 };
 
-export default DetailsSection;
+export default Contact;

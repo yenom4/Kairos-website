@@ -1,6 +1,6 @@
 import React from "react";
 
-const MadeByHumans = () => {
+const PreFooter = () => {
   return <section id="made-by-humans" className="w-full bg-white py-0">
       <div className="section-container opacity-0 animate-on-scroll">
         {/* Removed the pulse-chip button/element that was here */}
@@ -39,4 +39,4 @@ const MadeByHumans = () => {
       </div>
     </section>;
 };
-export default MadeByHumans;
+export default PreFooter;

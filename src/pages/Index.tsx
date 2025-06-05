@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
-import HumanoidSection from "@/components/HumanoidSection";
-import SpecsSection from "@/components/SpecsSection";
+import Benefits from "@/components/Benefits";
+import Mission from "@/components/Mission";
 import ProcessSection from "@/components/ProcessSection";
-import DetailsSection from "@/components/DetailsSection";
+import Contact from "@/components/Contact";
 import Testimonials from "@/components/Testimonials";
 import FAQSection from "@/components/FAQSection";
 import FinalCTASection from "@/components/FinalCTASection";
-import MadeByHumans from "@/components/MadeByHumans";
+import PreFooter from "@/components/PreFooter";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -64,14 +64,14 @@ const Index = () => {
       <main className="space-y-4 sm:space-y-8"> {/* Reduced space on mobile */}
         <Hero />
         <Features />
-        <HumanoidSection />
-        <SpecsSection />
+        <Benefits />
+        <Mission />
         <ProcessSection />
         <Testimonials />
-        <DetailsSection />
+        <Contact />
         <FAQSection />
         <FinalCTASection />
-        <MadeByHumans />
+        <PreFooter />
       </main>
       <Footer />
     </div>

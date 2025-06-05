@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-const HumanoidSection = () => {
+const Benefits = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
@@ -185,4 +185,4 @@ const HumanoidSection = () => {
       </section>
     </div>;
 };
-export default HumanoidSection;
+export default Benefits;

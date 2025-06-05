@@ -7,7 +7,7 @@ const ANIMATION_SCROLL_HEIGHT = 1600; // Encore augmenté pour une animation plu
 const PIN_START_OFFSET_VH = 0; // Changé à 0 pour que le pinning commence quand le haut de la section atteint le haut de la fenêtre
 const POST_ANIMATION_PIN_DELAY_PX = 300; // Délai de scroll en pixels après la fin de l'animation des mots
 
-const SpecsSection = () => {
+const Mission = () => {
   const words = TEXT_CONTENT.split(' ');
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visibleWordsCount, setVisibleWordsCount] = useState(INITIAL_VISIBLE_WORDS);
@@ -154,4 +154,4 @@ const SpecsSection = () => {
   );
 };
 
-export default SpecsSection;
+export default Mission;
