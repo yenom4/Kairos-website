@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface FAQItemProps {
   question: string;
@@ -11,17 +12,33 @@ interface FAQItemProps {
 
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer, isOpen, onClick }) => {
   return (
-    <div className="border-b border-gray-200 py-4">
+    <div className="border-b border-gray-200 py-4" itemScope itemType="https://schema.org/Question">
       <button
         onClick={onClick}
         className="w-full flex justify-between items-center text-left text-gray-800 hover:text-orange-500 focus:outline-none"
+        role="button"
+        tabIndex={0}
+        aria-expanded={isOpen}
+        aria-controls={`answer-${question.replace(/\s+/g, '-')}`}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onClick();
+          }
+        }}
       >
-        <span className="text-lg font-medium">{question}</span>
+        <span className="text-lg font-medium" itemProp="name">{question}</span>
         {isOpen ? <ChevronUp className="w-5 h-5 text-orange-500 ml-4 flex-shrink-0" /> : <ChevronDown className="w-5 h-5 text-gray-500 ml-4 flex-shrink-0" />}
       </button>
       {isOpen && (
-        <div className="mt-3 text-gray-600 text-sm sm:text-base">
-          <p>{answer}</p>
+        <div 
+          id={`answer-${question.replace(/\s+/g, '-')}`}
+          className="mt-3 text-gray-600 text-sm sm:text-base"
+          itemProp="acceptedAnswer"
+          itemScope
+          itemType="https://schema.org/Answer"
+        >
+          <p itemProp="text">{answer}</p>
         </div>
       )}
     </div>
@@ -125,7 +142,7 @@ const FAQSection = () => {
   };
 
   return (
-    <section id="faq" className="w-full bg-gray-50 pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-16 md:pb-20">
+    <section id="faq" className="w-full bg-gray-50 pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-16 md:pb-20" role="region" aria-labelledby="faq-title">
       <motion.div 
         className="section-container px-4 sm:px-6 lg:px-8 mx-auto"
         variants={containerVariants}
@@ -138,24 +155,38 @@ const FAQSection = () => {
           <div className="pulse-chip">
             <span>FAQ</span>
           </div>
-          <div className="h-[1px] bg-gray-300 flex-grow"></div>
+          <div className="h-[1px] bg-gray-300 flex-grow" aria-hidden="true"></div>
         </motion.div>
 
         {/* Titles */}
-        <div className="text-center mb-10 sm:mb-16">
-          <motion.h2 className="text-4xl sm:text-5xl font-display font-bold text-gray-900 mb-3 sm:mb-4" variants={itemVariants}>
+        <header className="text-center mb-10 sm:mb-16">
+          <motion.h2 id="faq-title" className="text-4xl sm:text-5xl font-display font-bold text-gray-900 mb-3 sm:mb-4" variants={itemVariants} itemProp="name">
             On répond avant que vous demandiez
           </motion.h2>
-          <motion.p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto" variants={itemVariants}>
-            Tout ce que vous devez savoir sur nos services, notre méthode, et ce qu'on peut réellement automatiser pour vous.
+          <motion.p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto" variants={itemVariants} itemProp="description">
+            Tout ce que vous devez savoir sur nos services, notre méthode, et ce qu'on peut
+            réellement automatiser pour vous.
           </motion.p>
-        </div>
+        </header>
 
         {/* Q&A Grid - Rétablissement des deux colonnes distinctes */}
         <div className="grid md:grid-cols-2 gap-x-8 sm:gap-x-12 lg:gap-x-16">
-          <motion.div variants={columnVariants}> {/* Column 1 */}
+          {/* Colonne gauche */}
+          <motion.div 
+            variants={columnVariants}
+            role="list"
+            aria-label="Questions fréquentes - partie 1"
+            itemScope
+            itemType="https://schema.org/ItemList"
+          >
             {faqData.slice(0, Math.ceil(faqData.length / 2)).map((item) => (
-              <motion.div key={item.id} variants={faqItemVariants}>
+              <motion.div 
+                key={item.id} 
+                variants={faqItemVariants}
+                role="listitem"
+                itemScope
+                itemType="https://schema.org/Question"
+              >
                 <FAQItem
                   question={item.question}
                   answer={item.answer}
@@ -165,9 +196,23 @@ const FAQSection = () => {
               </motion.div>
             ))}
           </motion.div>
-          <motion.div variants={columnVariants}> {/* Column 2 */}
+          
+          {/* Colonne droite */}
+          <motion.div 
+            variants={columnVariants}
+            role="list"
+            aria-label="Questions fréquentes - partie 2"
+            itemScope
+            itemType="https://schema.org/ItemList"
+          >
             {faqData.slice(Math.ceil(faqData.length / 2)).map((item) => (
-              <motion.div key={item.id} variants={faqItemVariants}>
+              <motion.div 
+                key={item.id} 
+                variants={faqItemVariants}
+                role="listitem"
+                itemScope
+                itemType="https://schema.org/Question"
+              >
                 <FAQItem
                   question={item.question}
                   answer={item.answer}

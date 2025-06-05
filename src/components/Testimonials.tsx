@@ -67,7 +67,8 @@ const Testimonials = () => {
     },
   };
 
-  return <section className="-mt-4 pt-0 pb-28 bg-white relative" id="testimonials">
+  return (
+    <section id="testimonials" className="py-12 sm:py-16 md:py-20 bg-white" role="region" aria-labelledby="testimonials-title">
       <motion.div 
         className="section-container"
         variants={containerVariants}
@@ -75,29 +76,58 @@ const Testimonials = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <motion.div className="flex items-center gap-4 mb-6" variants={itemVariants}>
-          <div className="pulse-chip">
-            <span>Témoignages</span>
-          </div>
-        </motion.div>
+        <header className="mb-10 sm:mb-16">
+          <motion.div className="flex items-center gap-4 mb-6" variants={itemVariants}>
+            <div className="pulse-chip">
+              <span>Témoignages</span>
+            </div>
+            <div className="h-[1px] bg-gray-300 flex-grow" aria-hidden="true"></div>
+          </motion.div>
+          <motion.h2 id="testimonials-title" className="text-5xl font-display font-bold mb-12 text-left" variants={itemVariants} itemProp="name">
+            Ils nous ont fait confiance
+          </motion.h2>
+        </header>
         
-        <motion.h2 className="text-5xl font-display font-bold mb-12 text-left" variants={itemVariants}>Ils nous ont fait confiance</motion.h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
+          role="list"
+          aria-label="Témoignages clients Kairos AI"
+          itemScope
+          itemType="https://schema.org/ItemList"
+        >
           {testimonials.map((testimonial, index) => (
-            <motion.div key={index} variants={itemVariants}>
+            <motion.article 
+              key={index} 
+              variants={itemVariants}
+              role="listitem"
+              itemScope 
+              itemType="https://schema.org/Review"
+            >
               <TestimonialCard 
-                content={testimonial.content} 
-                author={testimonial.author} 
-                role={testimonial.role} 
-                gradient={testimonial.gradient} 
-                backgroundImage={testimonial.backgroundImage} 
+                content={testimonial.content}
+                author={testimonial.author}
+                role={testimonial.role}
+                gradient={testimonial.gradient}
+                backgroundImage={testimonial.backgroundImage}
               />
-            </motion.div>
+              <meta itemProp="reviewBody" content={testimonial.content} />
+              <div itemProp="author" itemScope itemType="https://schema.org/Person">
+                <meta itemProp="name" content={testimonial.author} />
+                <meta itemProp="jobTitle" content={testimonial.role} />
+              </div>
+              <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Service">
+                <meta itemProp="name" content="Automatisation acquisition client Kairos AI" />
+              </div>
+              <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                <meta itemProp="ratingValue" content="5" />
+                <meta itemProp="bestRating" content="5" />
+              </div>
+            </motion.article>
           ))}
         </div>
       </motion.div>
-    </section>;
+    </section>
+  );
 };
 
 export default Testimonials;

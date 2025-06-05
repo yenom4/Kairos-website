@@ -36,7 +36,6 @@ const Contact = () => {
     }
 
     // Demo form submission
-    console.log("Form data submitted:", formData);
     toast.success("Message envoyé avec succès !");
 
     // Reset form
@@ -47,46 +46,57 @@ const Contact = () => {
       description: ""
     });
   };
-  return <section id="details" className="w-full bg-white pt-12 sm:pt-16 md:pt-20">
-      <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
+  return (
+    <section id="details" className="w-full bg-white py-12 sm:py-16 md:py-20" role="region" aria-labelledby="contact-title">
+      <div className="section-container px-4 sm:px-6 lg:px-8 mx-auto">
+        {/* Chip and Bar */}
         <div className="flex items-center gap-4 mb-8 sm:mb-12">
-          <div className="pulse-chip animate-on-scroll">
+          <div className="pulse-chip">
             <span>Contact</span>
           </div>
-          <div className="h-[1px] bg-gray-300 flex-grow animate-on-scroll"></div>
+          <div className="h-[1px] bg-gray-300 flex-grow" aria-hidden="true"></div>
         </div>
+        
+        {/* Titre principal centré */}
         <div className="text-center pb-10 sm:pb-12 md:pb-16">
-          <h2 className="text-4xl sm:text-5xl font-display font-bold text-gray-900">
+          <h2 id="contact-title" className="text-4xl sm:text-5xl font-display font-bold text-gray-900">
             On vous écoute. Et on agit.
           </h2>
         </div>
+
+        {/* Main Content Grid */}
         <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2">
-          {/* Left Card - The Details */}
-          <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-elegant h-full flex flex-col">
-            {/* Card Header with background image instead of gradient */}
-            <div className="relative h-48 sm:h-64 p-6 sm:p-8 flex items-end" style={{
-            backgroundImage: "url('/background-section3.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}>
-              <h2 className="text-2xl sm:text-3xl font-display text-white font-bold">
+          
+          {/* Left Card - Consultation Offer */}
+          <article className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-elegant h-full flex flex-col"
+                   itemScope 
+                   itemType="https://schema.org/Service">
+            
+            {/* Card Header with background image */}
+            <header className="relative h-48 sm:h-64 p-6 sm:p-8 flex items-end" 
+                    style={{
+                      backgroundImage: "url('/background-section3.png')",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center"
+                    }}>
+              <h2 className="text-2xl sm:text-3xl font-display text-white font-bold" itemProp="name">
                 Réservez un audit gratuit
               </h2>
-            </div>
+            </header>
             
             {/* Card Content */}
             <div className="bg-white p-4 sm:p-8 flex-grow flex flex-col" style={{
             backgroundColor: "#FFFFFF"
           }}>
               <div className="flex-grow">
-                <h3 className="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-3 sm:mb-4">
+                <h3 className="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-3 sm:mb-4" itemProp="headline">
                   30 min pour transformer votre acquisition
                 </h3>
                 
-                <p className="text-gray-700 text-sm sm:text-base mb-4">
+                <p className="text-gray-700 text-sm sm:text-base mb-4" itemProp="description">
                   Analysons ensemble votre acquisition client actuelle et identifions les automatisations prioritaires à fort impact pour votre entreprise.
                 </p>
-                <div className="space-y-2 mb-6">
+                <div className="space-y-2 mb-6" role="list" aria-label="Bénéfices de l'audit gratuit">
                   {[{
                     text: "Diagnostic complet de votre acquisition actuelle"
                   }, {
@@ -98,41 +108,52 @@ const Contact = () => {
                   }, {
                     text: "Estimation du ROI et planning détaillé"
                   }].map((item, index) => (
-                    <div key={index} className="flex items-start">
-                      <span className="text-orange-500 mr-2 font-semibold">✓</span>
+                    <div key={index} className="flex items-start" role="listitem">
+                      <span className="text-orange-500 mr-2 font-semibold" aria-hidden="true">✓</span>
                       <span className="text-gray-700 text-sm sm:text-base">{item.text}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 shadow-sm">
-                  <p className="italic text-gray-700 text-sm sm:text-base mb-2">
+                <blockquote className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 shadow-sm"
+                           itemScope 
+                           itemType="https://schema.org/Review">
+                  <p className="italic text-gray-700 text-sm sm:text-base mb-2" itemProp="reviewBody">
                     💬 "Gabriel a identifié en 30 minutes des automatisations qui nous ont fait gagner une dizaine d'heures par semaine"
                   </p>
-                  <p className="text-sm text-gray-600 text-right font-medium">
-                    - Gaelle, Auto-entrepreneuse
-                  </p>
-                </div>
+                  <footer className="text-sm text-gray-600 text-right font-medium">
+                    <cite>
+                      <span itemProp="author" itemScope itemType="https://schema.org/Person">
+                        <span itemProp="name">- Gaelle</span>
+                      </span>, Auto-entrepreneuse
+                    </cite>
+                  </footer>
+                  <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                    <meta itemProp="ratingValue" content="5" />
+                    <meta itemProp="bestRating" content="5" />
+                  </div>
+                </blockquote>
               </div>
               
               <div className="mt-auto pt-4">
                 <CalPopupButton className="w-full" />
               </div>
             </div>
-          </div>
+          </article>
 
           {/* Right Card - Contact Form */}
-          <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-elegant h-full flex flex-col">
-            {/* Card Header with background image instead of gradient */}
-            <div className="relative h-48 sm:h-64 p-6 sm:p-8 flex flex-col items-start" style={{
-            backgroundImage: "url('/background-section1.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}>
+          <article className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-elegant h-full flex flex-col">
+            {/* Card Header with background image */}
+            <header className="relative h-48 sm:h-64 p-6 sm:p-8 flex flex-col items-start" 
+                    style={{
+                      backgroundImage: "url('/background-section1.png')",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center"
+                    }}>
               <h2 className="text-2xl sm:text-3xl font-display text-white font-bold mt-auto">
                 Nous contacter
               </h2>
-            </div>
+            </header>
             
             {/* Card Content - Form */}
             <div className="bg-white p-4 sm:p-8 flex-grow flex flex-col" style={{
@@ -141,68 +162,86 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="flex flex-col flex-grow">
                 <div className="flex-grow space-y-4 sm:space-y-6">
                   <div>
-                    <input 
-                      type="text" 
+                    <label htmlFor="firstName" className="sr-only">Prénom *</label>
+                    <input
+                      type="text"
+                      id="firstName"
                       name="firstName"
-                      value={formData.firstName} 
-                      onChange={handleChange} 
                       placeholder="Prénom"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pulse-500 focus:border-transparent" 
-                      required 
-                    />
-                  </div>
-                  
-                  <div>
-                    <input 
-                      type="email" 
-                      name="email" 
-                      value={formData.email} 
-                      onChange={handleChange} 
-                      placeholder="Adresse mail"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pulse-500 focus:border-transparent" 
-                      required 
-                    />
-                  </div>
-                  
-                  <div>
-                    <input 
-                      type="text" 
-                      name="company" 
-                      value={formData.company} 
-                      onChange={handleChange} 
-                      placeholder="Entreprise"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pulse-500 focus:border-transparent" 
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pulse-500 focus:border-transparent"
                       required
+                      aria-required="true"
+                      aria-describedby="firstName-error"
                     />
                   </div>
-
+                  
                   <div>
+                    <label htmlFor="email" className="sr-only">Email *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Adresse mail"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pulse-500 focus:border-transparent"
+                      required
+                      aria-required="true"
+                      aria-describedby="email-error"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="company" className="sr-only">Entreprise *</label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      placeholder="Entreprise"
+                      value={formData.company}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pulse-500 focus:border-transparent"
+                      required
+                      aria-required="true"
+                      aria-describedby="company-error"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="description" className="sr-only">Description de votre projet *</label>
                     <textarea
+                      id="description"
                       name="description"
+                      placeholder="Décrivez brièvement votre situation, vos problématiques et vos objectifs"
                       value={formData.description}
                       onChange={handleChange}
-                      placeholder="Décrivez brièvement votre situation, vos problématiques et vos objectifs"
                       className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pulse-500 focus:border-transparent min-h-[120px] sm:min-h-[150px] resize-y"
                       required
+                      aria-required="true"
+                      aria-describedby="description-error"
                     />
                   </div>
                 </div>
                 
                 <div className="mt-auto pt-4">
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="w-full px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-xl transition-colors duration-300 shadow-md hover:shadow-lg"
                     style={{ backgroundColor: '#FE5C02' }}
+                    aria-label="Envoyer le formulaire de contact"
                   >
                     Envoyer le message
                   </button>
                 </div>
               </form>
             </div>
-          </div>
+          </article>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default Contact;

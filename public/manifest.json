@@ -1,0 +1,26 @@
+{
+  "name": "Kairos AI - Automatisation Acquisition Client",
+  "short_name": "Kairos AI",
+  "description": "Automatisation intelligente de l'acquisition client par IA. Prospection, qualification, nurturing automatisé. ROI garanti en 2-4 mois.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FF6B35",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr",
+  "categories": ["business", "productivity", "technology"],
+  "icons": [
+    {
+      "src": "/Logo kairos noir.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+} 
