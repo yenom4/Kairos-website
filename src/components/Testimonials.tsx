@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { motion } from "framer-motion";
 
 interface TestimonialProps {
   content: string;
@@ -9,13 +10,13 @@ interface TestimonialProps {
 }
 
 const testimonials: TestimonialProps[] = [{
-  content: "L’équipe Kairos a vraiment pris le temps de comprendre nos processus. Leur solution d’automatisation est ultra pertinente : on a réduit nos coûts, nos pertes d’énergie et gagné un temps précieux.",
+  content: "L'équipe Kairos a vraiment pris le temps de comprendre nos processus. Leur solution d'automatisation est ultra pertinente : on a réduit nos coûts, nos pertes d'énergie et gagné un temps précieux.",
   author: "Pierre",
   role: "Section fonderie Gustave Eiffel",
   gradient: "from-blue-700 via-indigo-800 to-purple-900",
   backgroundImage: "/background-section1.png"
 }, {
-  content: "Je faisais tout moi-même, et c’était épuisant. Grâce à Kairos, ma prospection tourne en automatique. J’ai enfin du temps pour mes clients, pour structurer mon offre et développer mon activité sereinement.",
+  content: "Je faisais tout moi-même, et c'était épuisant. Grâce à Kairos, ma prospection tourne en automatique. J'ai enfin du temps pour mes clients, pour structurer mon offre et développer mon activité sereinement.",
   author: "Gaelle",
   role: "Auto-entrepreneuse",
   gradient: "from-indigo-900 via-purple-800 to-orange-500",
@@ -44,22 +45,58 @@ const TestimonialCard = ({
 };
 
 const Testimonials = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
-  return <section className="-mt-4 pt-0 pb-28 bg-white relative" id="testimonials" ref={sectionRef}> {/* Adjusted margins and padding */}
-      <div className="section-container opacity-0 animate-on-scroll">
-        <div className="flex items-center gap-4 mb-6">
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  return <section className="-mt-4 pt-0 pb-28 bg-white relative" id="testimonials">
+      <motion.div 
+        className="section-container"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <motion.div className="flex items-center gap-4 mb-6" variants={itemVariants}>
           <div className="pulse-chip">
             <span>Témoignages</span>
           </div>
-        </div>
+        </motion.div>
         
-        <h2 className="text-5xl font-display font-bold mb-12 text-left">Ils nous ont fait confiance</h2>
+        <motion.h2 className="text-5xl font-display font-bold mb-12 text-left" variants={itemVariants}>Ils nous ont fait confiance</motion.h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, index) => <TestimonialCard key={index} content={testimonial.content} author={testimonial.author} role={testimonial.role} gradient={testimonial.gradient} backgroundImage={testimonial.backgroundImage} />)}
+          {testimonials.map((testimonial, index) => (
+            <motion.div key={index} variants={itemVariants}>
+              <TestimonialCard 
+                content={testimonial.content} 
+                author={testimonial.author} 
+                role={testimonial.role} 
+                gradient={testimonial.gradient} 
+                backgroundImage={testimonial.backgroundImage} 
+              />
+            </motion.div>
+          ))}
         </div>
-      </div>
+      </motion.div>
     </section>;
 };
 

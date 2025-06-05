@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface FAQItemProps {
   question: string;
@@ -77,55 +78,109 @@ const FAQSection = () => {
     setOpenQuestionId(prevId => (prevId === id ? null : id));
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const columnVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const faqItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <section id="faq" className="w-full bg-gray-50 pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-16 md:pb-20">
-      <div className="section-container px-4 sm:px-6 lg:px-8 mx-auto">
+      <motion.div 
+        className="section-container px-4 sm:px-6 lg:px-8 mx-auto"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         {/* Chip and Bar */}
-        <div className="flex items-center gap-4 mb-8 sm:mb-12">
-          <div className="pulse-chip animate-on-scroll">
+        <motion.div className="flex items-center gap-4 mb-8 sm:mb-12" variants={itemVariants}>
+          <div className="pulse-chip">
             <span>FAQ</span>
           </div>
-          <div className="h-[1px] bg-gray-300 flex-grow animate-on-scroll"></div>
-        </div>
+          <div className="h-[1px] bg-gray-300 flex-grow"></div>
+        </motion.div>
 
         {/* Titles */}
         <div className="text-center mb-10 sm:mb-16">
-          <h2 className="text-4xl sm:text-5xl font-display font-bold text-gray-900 mb-3 sm:mb-4">
+          <motion.h2 className="text-4xl sm:text-5xl font-display font-bold text-gray-900 mb-3 sm:mb-4" variants={itemVariants}>
             On répond avant que vous demandiez
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+          </motion.h2>
+          <motion.p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto" variants={itemVariants}>
             Tout ce que vous devez savoir sur nos services, notre méthode, et ce qu'on peut réellement automatiser pour vous.
-          </p>
+          </motion.p>
         </div>
 
         {/* Q&A Grid - Rétablissement des deux colonnes distinctes */}
         <div className="grid md:grid-cols-2 gap-x-8 sm:gap-x-12 lg:gap-x-16">
-          <div> {/* Column 1 */}
+          <motion.div variants={columnVariants}> {/* Column 1 */}
             {faqData.slice(0, Math.ceil(faqData.length / 2)).map((item) => (
-              <FAQItem
-                key={item.id}
-                question={item.question}
-                answer={item.answer}
-                isOpen={openQuestionId === item.id}
-                onClick={() => handleQuestionClick(item.id)}
-              />
+              <motion.div key={item.id} variants={faqItemVariants}>
+                <FAQItem
+                  question={item.question}
+                  answer={item.answer}
+                  isOpen={openQuestionId === item.id}
+                  onClick={() => handleQuestionClick(item.id)}
+                />
+              </motion.div>
             ))}
-          </div>
-          <div> {/* Column 2 */}
+          </motion.div>
+          <motion.div variants={columnVariants}> {/* Column 2 */}
             {faqData.slice(Math.ceil(faqData.length / 2)).map((item) => (
-              <FAQItem
-                key={item.id}
-                question={item.question}
-                answer={item.answer}
-                isOpen={openQuestionId === item.id}
-                onClick={() => handleQuestionClick(item.id)}
-              />
+              <motion.div key={item.id} variants={faqItemVariants}>
+                <FAQItem
+                  question={item.question}
+                  answer={item.answer}
+                  isOpen={openQuestionId === item.id}
+                  onClick={() => handleQuestionClick(item.id)}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* CTA */}
-        <div className="mt-12 sm:mt-16 text-center">
+        <motion.div className="mt-12 sm:mt-16 text-center" variants={itemVariants}>
           <p className="text-lg sm:text-xl text-gray-700 mb-6">
             Vous avez d'autres questions ? Discutons-en !<br className="sm:hidden"/> Contactez-nous dès maintenant.
           </p>
@@ -142,8 +197,8 @@ const FAQSection = () => {
           >
             Nous contacter
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
