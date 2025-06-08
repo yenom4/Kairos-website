@@ -1,10 +1,13 @@
 import React from 'react';
 import { Mail, Phone } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  const location = useLocation();
+  
   const socialMedia = [
-    { name: 'LinkedIn', href: '#', imgSrc: '/Linkedin.svg' },
-    { name: 'X', href: '#', imgSrc: '/X.svg' },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/gabriel-lor%C3%A9e-12407a364/', imgSrc: '/Linkedin.svg' },
+    { name: 'X', href: 'https://x.com/_kairos_AI_', imgSrc: '/X.svg' },
     { name: 'Instagram', href: '#', imgSrc: '/Instagram.svg' },
   ];
 
@@ -16,8 +19,11 @@ const Footer = () => {
     { href: '#faq', label: 'FAQ' },
   ];
 
+  // Détermine si on est sur la page d'accueil ou non
+  const isHomePage = location.pathname === '/';
+
   return (
-    <footer className="bg-white text-black pt-0 pb-4 font-light" 
+    <footer className="bg-white text-black pt-6 pb-4 font-light" 
             role="contentinfo" 
             itemScope 
             itemType="https://schema.org/Organization">
@@ -63,11 +69,19 @@ const Footer = () => {
               <ul className="space-y-2">
                 {navLinks.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} 
-                       className="hover:text-gray-600 transition-colors duration-300 font-normal"
-                       title={`Aller à la section ${link.label}`}>
-                      {link.label}
-                    </a>
+                    {isHomePage ? (
+                      <a href={link.href} 
+                         className="hover:text-gray-600 transition-colors duration-300 font-normal"
+                         title={`Aller à la section ${link.label}`}>
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link to={`/${link.href}`} 
+                         className="hover:text-gray-600 transition-colors duration-300 font-normal"
+                         title={`Aller à la section ${link.label}`}>
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -77,11 +91,12 @@ const Footer = () => {
           {/* Colonne 3 (Droite): Légal et Contact */}
           <div className="md:col-span-1 text-left md:text-right"> 
             <nav aria-label="Liens légaux et informations" className="mb-4">
-              <a href="#privacy-policy" 
-                 className="block hover:text-gray-600 transition-colors duration-300 font-normal"
-                 title="Consulter notre politique de confidentialité">
+              <Link 
+                to="/politique-de-confidentialite" 
+                className="block hover:text-gray-600 transition-colors duration-300 font-normal"
+                title="Consulter notre politique de confidentialité">
                 Politique de confidentialité
-              </a>
+              </Link>
               <a href="#legal-mentions" 
                  className="block hover:text-gray-600 transition-colors duration-300 font-normal mt-1"
                  title="Consulter nos mentions légales">

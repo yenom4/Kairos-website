@@ -34,6 +34,7 @@ export const useIntersectionObserver = (
       },
       {
         threshold,
+        rootMargin: '50px',
         ...restOptions,
       }
     );

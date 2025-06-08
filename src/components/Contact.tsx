@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
+import emailjs from '@emailjs/browser';
 import CalPopupButton from "./CalPopupButton";
 
 const Contact = () => {
@@ -9,17 +10,17 @@ const Contact = () => {
     company: "",
     description: ""
   });
+  const [isLoading, setIsLoading] = useState(false);
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {
-      name,
-      value
-    } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
-  const handleSubmit = (e: React.FormEvent) => {
+  
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Validation du format de l'email
@@ -35,16 +36,44 @@ const Contact = () => {
       return;
     }
 
-    // Demo form submission
-    toast.success("Message envoyé avec succès !");
+    setIsLoading(true);
 
-    // Reset form
-    setFormData({
-      firstName: "",
-      email: "",
-      company: "",
-      description: ""
-    });
+    try {
+      // Configuration EmailJS
+      const serviceId = 'service_z5ljct4';
+      const templateId = 'template_aom27is';
+      const notificationTemplateId = 'template_oecjeu8';
+      const publicKey = '4su8dhWcrgaNGb2tm';
+
+      const templateParams = {
+        from_name: formData.firstName,
+        from_email: formData.email,
+        company: formData.company,
+        message: formData.description,
+        to_name: 'Kairos AI',
+      };
+
+      // Premier envoi : email de confirmation au client
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      
+      // Second envoi : notification avec les infos du formulaire à Gabriel
+      await emailjs.send(serviceId, notificationTemplateId, templateParams, publicKey);
+      
+      toast.success("Message envoyé avec succès ! Nous vous recontacterons rapidement.");
+
+      // Reset form
+      setFormData({
+        firstName: "",
+        email: "",
+        company: "",
+        description: ""
+      });
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      toast.error("Erreur lors de l'envoi. Veuillez réessayer ou nous contacter directement.");
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <section id="details" className="w-full bg-white py-12 sm:py-16 md:py-20" role="region" aria-labelledby="contact-title">
@@ -77,7 +106,9 @@ const Contact = () => {
                     style={{
                       backgroundImage: "url('/background-section3.png')",
                       backgroundSize: "cover",
-                      backgroundPosition: "center"
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                      willChange: "auto"
                     }}>
               <h2 className="text-2xl sm:text-3xl font-display text-white font-bold" itemProp="name">
                 Réservez un audit gratuit
@@ -148,7 +179,9 @@ const Contact = () => {
                     style={{
                       backgroundImage: "url('/background-section1.png')",
                       backgroundSize: "cover",
-                      backgroundPosition: "center"
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                      willChange: "auto"
                     }}>
               <h2 className="text-2xl sm:text-3xl font-display text-white font-bold mt-auto">
                 Nous contacter
@@ -228,11 +261,12 @@ const Contact = () => {
                 <div className="mt-auto pt-4">
                   <button
                     type="submit"
-                    className="w-full px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-xl transition-colors duration-300 shadow-md hover:shadow-lg"
-                    style={{ backgroundColor: '#FE5C02' }}
+                    disabled={isLoading}
+                    className="w-full px-6 py-3 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 disabled:cursor-not-allowed text-white font-medium rounded-xl transition-colors duration-300 shadow-md hover:shadow-lg"
+                    style={{ backgroundColor: isLoading ? '#FEB166' : '#FE5C02' }}
                     aria-label="Envoyer le formulaire de contact"
                   >
-                    Envoyer le message
+                    {isLoading ? 'Envoi en cours...' : 'Envoyer le message'}
                   </button>
                 </div>
               </form>

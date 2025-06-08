@@ -71,6 +71,8 @@ const Hero = () => {
   return <main className="overflow-hidden relative bg-cover" id="hero" role="banner" style={{
     backgroundImage: 'url("/Header-background.webp")',
     backgroundPosition: 'center 30%',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
     padding: isMobile ? '100px 12px 40px' : '120px 20px 60px'
   }}>
       <div className="absolute -top-[10%] -right-[5%] w-1/2 h-[70%] bg-pulse-gradient opacity-20 blur-3xl rounded-full" aria-hidden="true"></div>
@@ -157,7 +159,9 @@ const Hero = () => {
                              filter: 'drop-shadow(0 0 15px rgba(255, 107, 53, 0.3))'
                            }}
                            loading="eager"
-                           fetchPriority="high" />
+                           fetchPriority="high"
+                           decoding="async"
+                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" />
                     </div>
                   </div>
                   

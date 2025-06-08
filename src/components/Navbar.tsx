@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -13,11 +17,13 @@ const Navbar = () => {
     });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     // Prevent background scrolling when menu is open
     document.body.style.overflow = !isMenuOpen ? 'hidden' : '';
   };
+  
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -30,14 +36,14 @@ const Navbar = () => {
       document.body.style.overflow = '';
     }
   };
+
+  // Détermine si on est sur la page d'accueil ou non
+  const isHomePage = location.pathname === '/';
+  
   return <header className={cn("fixed top-0 left-0 right-0 z-50 py-2 sm:py-3 md:py-4 transition-all duration-300", isScrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : "bg-transparent")} role="banner">
       <div className="container flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#" 
+        <Link to="/" 
            className="flex items-center space-x-2" 
-           onClick={e => {
-             e.preventDefault();
-             scrollToTop();
-           }} 
            aria-label="Kairos AI - Retour à l'accueil"
            title="Kairos AI - Automatisation acquisition client"
            itemScope
@@ -48,29 +54,55 @@ const Navbar = () => {
                itemProp="logo"
                loading="eager"
                fetchPriority="high" />
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Navigation principale">
-          <a href="#" 
-             className="nav-link" 
-             onClick={e => {
-               e.preventDefault();
-               scrollToTop();
-             }}
-             title="Retour à l'accueil">
-            Accueil
-          </a>
-          <a href="#features" 
-             className="nav-link"
-             title="Découvrir nos solutions d'automatisation">
-            Solutions
-          </a>
-          <a href="#details" 
-             className="nav-link"
-             title="Nous contacter pour un audit gratuit">
-            Contact
-          </a>
+          {isHomePage ? (
+            <a href="#" 
+               className="nav-link" 
+               onClick={e => {
+                 e.preventDefault();
+                 scrollToTop();
+               }}
+               title="Retour à l'accueil">
+              Accueil
+            </a>
+          ) : (
+            <Link to="/" 
+               className="nav-link"
+               title="Retour à l'accueil">
+              Accueil
+            </Link>
+          )}
+          
+          {isHomePage ? (
+            <a href="#features" 
+               className="nav-link"
+               title="Découvrir nos solutions d'automatisation">
+              Solutions
+            </a>
+          ) : (
+            <Link to="/#features" 
+               className="nav-link"
+               title="Découvrir nos solutions d'automatisation">
+              Solutions
+            </Link>
+          )}
+          
+          {isHomePage ? (
+            <a href="#details" 
+               className="nav-link"
+               title="Nous contacter pour un audit gratuit">
+              Contact
+            </a>
+          ) : (
+            <Link to="/#details" 
+               className="nav-link"
+               title="Nous contacter pour un audit gratuit">
+              Contact
+            </Link>
+          )}
         </nav>
 
         {/* Mobile menu button - increased touch target */}
@@ -90,37 +122,73 @@ const Navbar = () => {
              role="navigation" 
              aria-label="Navigation mobile">
           <div className="px-4 py-6 space-y-4">
-            <a
-              href="#"
-              className="block text-lg font-medium text-gray-700 hover:text-gray-900 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
-              onClick={e => {
-                e.preventDefault();
-                scrollToTop();
-                setIsMenuOpen(false);
-              }}
-              title="Retour à l'accueil"
-            >
-              Accueil
-            </a>
-            <a
-              href="#features"
-              className="block text-lg font-medium text-gray-700 hover:text-gray-900 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-              title="Découvrir nos solutions d'automatisation"
-            >
-              Solutions
-            </a>
-            <a
-              href="#details"
-              className="block text-lg font-medium text-gray-700 hover:text-gray-900 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-              title="Nous contacter pour un audit gratuit"
-            >
-              Contact
-            </a>
+            {isHomePage ? (
+              <a
+                href="#"
+                className="block text-lg font-medium text-gray-700 hover:text-gray-900 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={e => {
+                  e.preventDefault();
+                  scrollToTop();
+                  setIsMenuOpen(false);
+                }}
+                title="Retour à l'accueil"
+              >
+                Accueil
+              </a>
+            ) : (
+              <Link
+                to="/"
+                className="block text-lg font-medium text-gray-700 hover:text-gray-900 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                title="Retour à l'accueil"
+              >
+                Accueil
+              </Link>
+            )}
+            
+            {isHomePage ? (
+              <a
+                href="#features"
+                className="block text-lg font-medium text-gray-700 hover:text-gray-900 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                title="Découvrir nos solutions d'automatisation"
+              >
+                Solutions
+              </a>
+            ) : (
+              <Link
+                to="/#features"
+                className="block text-lg font-medium text-gray-700 hover:text-gray-900 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                title="Découvrir nos solutions d'automatisation"
+              >
+                Solutions
+              </Link>
+            )}
+            
+            {isHomePage ? (
+              <a
+                href="#details"
+                className="block text-lg font-medium text-gray-700 hover:text-gray-900 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                title="Nous contacter pour un audit gratuit"
+              >
+                Contact
+              </a>
+            ) : (
+              <Link
+                to="/#details"
+                className="block text-lg font-medium text-gray-700 hover:text-gray-900 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                title="Nous contacter pour un audit gratuit"
+              >
+                Contact
+              </Link>
+            )}
           </div>
         </nav>
       )}
     </header>;
 };
+
 export default Navbar;

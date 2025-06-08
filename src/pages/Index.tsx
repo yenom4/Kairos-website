@@ -11,6 +11,7 @@ import FAQSection from "@/components/FAQSection";
 import FinalCTASection from "@/components/FinalCTASection";
 import PreFooter from "@/components/PreFooter";
 import Footer from "@/components/Footer";
+import CookieBanner from "@/components/CookieBanner";
 
 const Index = () => {
   // Initialize intersection observer to detect when elements enter viewport
@@ -74,6 +75,7 @@ const Index = () => {
         <PreFooter />
       </main>
       <Footer />
+      <CookieBanner />
     </div>
   );
 };
