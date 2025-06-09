@@ -146,33 +146,13 @@ const Contact = () => {
                   ))}
                 </div>
 
-                <blockquote className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 shadow-sm"
-                           itemScope 
-                           itemType="https://schema.org/Review">
-                  <p className="italic text-gray-700 text-sm sm:text-base mb-2" itemProp="reviewBody">
+                <blockquote className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 shadow-sm">
+                  <p className="italic text-gray-700 text-sm sm:text-base mb-2">
                     💬 "Gabriel a identifié en 30 minutes des automatisations qui nous ont fait gagner une dizaine d'heures par semaine"
                   </p>
                   <footer className="text-sm text-gray-600 text-right font-medium">
-                    <cite>
-                      <span itemProp="author" itemScope itemType="https://schema.org/Person">
-                        <span itemProp="name">- Gaelle</span>
-                      </span>, Auto-entrepreneuse
-                    </cite>
+                    <cite>- Gaelle, Auto-entrepreneuse</cite>
                   </footer>
-                  <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Service">
-                    <meta itemProp="name" content="Audit gratuit acquisition client Kairos AI" />
-                    <meta itemProp="description" content="Audit gratuit de l'acquisition client et consultation en automatisation IA" />
-                    <div itemProp="provider" itemScope itemType="https://schema.org/Organization">
-                      <meta itemProp="name" content="Kairos AI" />
-                      <meta itemProp="url" content="https://kairos-ai.fr" />
-                    </div>
-                  </div>
-                  <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                    <meta itemProp="ratingValue" content="5" />
-                    <meta itemProp="bestRating" content="5" />
-                    <meta itemProp="worstRating" content="1" />
-                  </div>
-                  <meta itemProp="datePublished" content="2025-01-15" />
                 </blockquote>
               </div>
               

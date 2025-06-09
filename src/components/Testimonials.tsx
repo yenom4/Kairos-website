@@ -92,16 +92,12 @@ const Testimonials = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
           role="list"
           aria-label="Témoignages clients Kairos AI"
-          itemScope
-          itemType="https://schema.org/ItemList"
         >
           {testimonials.map((testimonial, index) => (
             <motion.article 
               key={index} 
               variants={itemVariants}
               role="listitem"
-              itemScope 
-              itemType="https://schema.org/Review"
             >
               <TestimonialCard 
                 content={testimonial.content}
@@ -110,25 +106,6 @@ const Testimonials = () => {
                 gradient={testimonial.gradient}
                 backgroundImage={testimonial.backgroundImage}
               />
-              <meta itemProp="reviewBody" content={testimonial.content} />
-              <div itemProp="author" itemScope itemType="https://schema.org/Person">
-                <meta itemProp="name" content={testimonial.author} />
-                <meta itemProp="jobTitle" content={testimonial.role} />
-              </div>
-              <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Service">
-                <meta itemProp="name" content="Automatisation acquisition client Kairos AI" />
-                <meta itemProp="description" content="Service d'automatisation de l'acquisition client par intelligence artificielle" />
-                <div itemProp="provider" itemScope itemType="https://schema.org/Organization">
-                  <meta itemProp="name" content="Kairos AI" />
-                  <meta itemProp="url" content="https://kairos-ai.fr" />
-                </div>
-              </div>
-              <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                <meta itemProp="ratingValue" content="5" />
-                <meta itemProp="bestRating" content="5" />
-                <meta itemProp="worstRating" content="1" />
-              </div>
-              <meta itemProp="datePublished" content="2025-01-15" />
             </motion.article>
           ))}
         </div>
