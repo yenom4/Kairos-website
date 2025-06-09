@@ -159,10 +159,20 @@ const Contact = () => {
                       </span>, Auto-entrepreneuse
                     </cite>
                   </footer>
+                  <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Service">
+                    <meta itemProp="name" content="Audit gratuit acquisition client Kairos AI" />
+                    <meta itemProp="description" content="Audit gratuit de l'acquisition client et consultation en automatisation IA" />
+                    <div itemProp="provider" itemScope itemType="https://schema.org/Organization">
+                      <meta itemProp="name" content="Kairos AI" />
+                      <meta itemProp="url" content="https://kairos-ai.fr" />
+                    </div>
+                  </div>
                   <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
                     <meta itemProp="ratingValue" content="5" />
                     <meta itemProp="bestRating" content="5" />
+                    <meta itemProp="worstRating" content="1" />
                   </div>
+                  <meta itemProp="datePublished" content="2025-01-15" />
                 </blockquote>
               </div>
               
