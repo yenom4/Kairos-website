@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { trackPageView } from "./utils/analytics";
 
 import Index from "./pages/Index";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -15,6 +16,11 @@ const ScrollToAnchor = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // Track page view
+    const currentUrl = window.location.origin + location.pathname + location.search + location.hash;
+    const pageTitle = document.title;
+    trackPageView(currentUrl, pageTitle);
+
     if (location.hash) {
       // Si il y a un hash, scroll vers la section
       setTimeout(() => {

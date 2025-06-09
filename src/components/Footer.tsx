@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { trackConversion } from '../utils/analytics';
 
 const Footer = () => {
   const location = useLocation();
@@ -108,7 +109,8 @@ const Footer = () => {
                  className="flex items-center md:justify-end hover:text-gray-600 transition-colors duration-300 text-sm not-italic"
                  itemProp="email"
                  aria-label="Envoyer un email à Kairos AI"
-                 title="Contactez-nous par email">
+                 title="Contactez-nous par email"
+                 onClick={() => trackConversion('email_click', 25, 'Footer email click')}>
                 <Mail size={16} strokeWidth={1.5} className="mr-2" aria-hidden="true" />
                 contact@kairos-ai.fr
               </a>
@@ -116,7 +118,8 @@ const Footer = () => {
                  className="flex items-center md:justify-end hover:text-gray-600 transition-colors duration-300 text-sm mt-2 not-italic"
                  itemProp="telephone"
                  aria-label="Appeler Kairos AI"
-                 title="Contactez-nous par téléphone">
+                 title="Contactez-nous par téléphone"
+                 onClick={() => trackConversion('phone_call', 50, 'Footer phone click')}>
                 <Phone size={16} strokeWidth={1.5} className="mr-2" aria-hidden="true" />
                 06 67 09 84 87
               </a>

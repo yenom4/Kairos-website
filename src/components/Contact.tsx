@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import emailjs from '@emailjs/browser';
 import CalPopupButton from "./CalPopupButton";
+import { trackConversion, trackError } from "../utils/analytics";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -60,6 +61,9 @@ const Contact = () => {
       await emailjs.send(serviceId, notificationTemplateId, templateParams, publicKey);
       
       toast.success("Message envoyé avec succès ! Nous vous recontacterons rapidement.");
+      
+      // Track successful form submission
+      trackConversion('contact_form', 100, `Contact form - ${formData.company}`);
 
       // Reset form
       setFormData({
@@ -70,6 +74,10 @@ const Contact = () => {
       });
     } catch (error) {
       console.error('Erreur lors de l\'envoi:', error);
+      
+      // Track form submission error
+      trackError('contact_form_error', error instanceof Error ? error.message : 'Unknown error');
+      
       toast.error("Erreur lors de l'envoi. Veuillez réessayer ou nous contacter directement.");
     } finally {
       setIsLoading(false);

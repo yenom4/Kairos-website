@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { getCalApi } from '@calcom/embed-react';
 import { toast } from 'sonner'; // Assurez-vous que toast est disponible ou gérez les erreurs autrement
+import { trackConversion, trackCTAClick } from '../utils/analytics';
 
 interface CalPopupButtonProps {
   text?: string;
@@ -36,10 +37,17 @@ const CalPopupButton: React.FC<CalPopupButtonProps> = ({
   // Specific classes for the solid orange button style
   const solidButtonClasses = "bg-orange-600 hover:bg-orange-700 text-white";
 
+  const handleClick = () => {
+    // Track calendar booking attempt
+    trackCTAClick(text, 'calendar_button');
+    trackConversion('calendar_booking', 200, `Calendar booking - ${calLink}`);
+  };
+
   return (
     <button
       data-cal-link={calLink}
       className={`${baseClassName} ${solidButtonClasses} ${className}`.trim()}
+      onClick={handleClick}
     >
       {text}
     </button>
