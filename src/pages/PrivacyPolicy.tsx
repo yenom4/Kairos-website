@@ -143,23 +143,34 @@ const PrivacyPolicy = () => {
         </div>
         
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-pulse-50 to-white pb-16">
+        <section className="relative bg-gradient-to-br from-pulse-50 to-white py-16">
           <div className="absolute inset-0 bg-[url('/Header-background.webp')] bg-cover bg-center opacity-5"></div>
-          <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="max-w-4xl mx-auto pt-12">
-              <div className="pulse-chip mb-6 inline-flex items-center">
-                <Shield className="w-4 h-4 mr-2" />
-                <span>Protection des données</span>
+          <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto text-center">
+              {/* Chip */}
+              <div className="flex justify-center mb-8">
+                <div className="pulse-chip inline-flex items-center">
+                  <Shield className="w-4 h-4 mr-2" />
+                  <span>Protection des données</span>
+                </div>
               </div>
-              <h1 className="section-title text-4xl md:text-5xl lg:text-6xl mb-6">
+              
+              {/* Titre principal */}
+              <h1 className="section-title text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-gray-900">
                 Politique de Confidentialité
               </h1>
-              <p className="section-subtitle text-lg md:text-xl text-gray-600 mb-4">
+              
+              {/* Sous-titre */}
+              <p className="section-subtitle text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
                 Kairos AI s'engage à protéger vos données personnelles avec la plus grande transparence
               </p>
-              <div className="inline-flex items-center text-sm text-gray-500 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full">
-                <Clock className="w-4 h-4 mr-2" />
-                Dernière mise à jour : 08 juin 2025
+              
+              {/* Date de mise à jour */}
+              <div className="flex justify-center">
+                <div className="inline-flex items-center text-sm text-gray-500 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-sm">
+                  <Clock className="w-4 h-4 mr-2" />
+                  Dernière mise à jour : 08 juin 2025
+                </div>
               </div>
             </div>
           </div>
