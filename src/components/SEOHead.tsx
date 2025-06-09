@@ -51,8 +51,8 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@KairosAI_FR" />
-      <meta name="twitter:creator" content="@KairosAI_FR" />
+      <meta name="twitter:site" content="@_kairos_AI_" />
+      <meta name="twitter:creator" content="@_kairos_AI_" />
       <meta name="twitter:url" content={canonicalUrl} />
       <meta name="twitter:title" content={finalOgTitle} />
       <meta name="twitter:description" content={finalOgDescription} />
