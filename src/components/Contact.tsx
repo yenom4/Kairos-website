@@ -156,7 +156,7 @@ const Contact = () => {
 
                 <blockquote className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 shadow-sm">
                   <p className="italic text-gray-700 text-sm sm:text-base mb-2">
-                    💬 "Gabriel a identifié en 30 minutes des automatisations qui nous ont fait gagner une dizaine d'heures par semaine"
+                    💬 "Gabriel a identifié en 30 minutes des automatisations qui m'ont fait gagner une dizaine d'heures par semaine"
                   </p>
                   <footer className="text-sm text-gray-600 text-right font-medium">
                     <cite>- Gaelle, Auto-entrepreneuse</cite>
