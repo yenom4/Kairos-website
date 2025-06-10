@@ -13,9 +13,13 @@ const PreFooter = () => {
               <img
                 src="/Kairos blanc.svg"
                 alt="Kairos Logo"
-                className="h-8 sm:h-10 w-auto mr-4 img-optimized"
+                className="h-8 sm:h-10 w-auto mr-4"
                 style={{
-                  imageRendering: 'crisp-edges'
+                  imageRendering: 'pixelated' as any,
+                  WebkitFontSmoothing: 'antialiased' as any,
+                  MozOsxFontSmoothing: 'grayscale' as any,
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
                 }}
               />
               <span className="text-white text-xl font-medium">

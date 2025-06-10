@@ -50,12 +50,16 @@ const Navbar = () => {
            itemType="https://schema.org/Organization">
           <img alt="Logo Kairos AI - Automatisation intelligente acquisition client" 
                src="/Kairos noir.svg" 
-               className="h-7 sm:h-8 object-contain img-optimized" 
+               className="h-7 sm:h-8 object-contain" 
                itemProp="logo"
                loading="eager"
                fetchPriority="high" 
                style={{
-                 imageRendering: 'crisp-edges'
+                 imageRendering: 'pixelated' as any,
+                 WebkitFontSmoothing: 'antialiased' as any,
+                 MozOsxFontSmoothing: 'grayscale' as any,
+                 transform: 'translateZ(0)',
+                 backfaceVisibility: 'hidden'
                }} />
         </Link>
 
