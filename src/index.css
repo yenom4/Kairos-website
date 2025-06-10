@@ -169,6 +169,23 @@
     image-rendering: -webkit-optimize-contrast;
   }
 
+  /* SVG optimization for crisp rendering on all screens */
+  svg, img[src$=".svg"] {
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    shape-rendering: crispEdges;
+  }
+
+  /* Ensure SVGs are crisp on mobile devices */
+  @media (max-width: 768px) {
+    svg, img[src$=".svg"] {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+      shape-rendering: crispEdges;
+    }
+  }
+
   /* Cookie Banner Styles */
   .cookie-banner {
     backdrop-filter: blur(20px);

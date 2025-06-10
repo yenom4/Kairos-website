@@ -70,10 +70,11 @@ const Hero = () => {
   }, [isMobile]);
   return <main className="overflow-hidden relative bg-cover" id="hero" role="banner" style={{
     backgroundImage: 'url("/Header-background.webp")',
-    backgroundPosition: 'center 30%',
+    backgroundPosition: 'center center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    padding: isMobile ? '100px 12px 40px' : '120px 20px 60px'
+    padding: isMobile ? '100px 12px 40px' : '120px 20px 60px',
+    minHeight: '100vh'
   }}>
       <div className="absolute -top-[10%] -right-[5%] w-1/2 h-[70%] bg-pulse-gradient opacity-20 blur-3xl rounded-full" aria-hidden="true"></div>
       
@@ -89,7 +90,7 @@ const Hero = () => {
             <h1 className="section-title text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight opacity-0 animate-fade-in" style={{
             animationDelay: "0.3s"
           }} itemProp="headline">
-              Le bon moment pour<br className="hidden sm:inline" />optimiser votre croissance
+              Le bon moment pour <br className="hidden sm:inline" />optimiser votre croissance
             </h1>
             
             <p style={{
