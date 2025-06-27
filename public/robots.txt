@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://kairos-ai.fr/sitemap.xml
+Sitemap: https://www.kairos-ai.fr/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

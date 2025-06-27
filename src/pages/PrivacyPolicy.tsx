@@ -35,11 +35,11 @@ const PrivacyPolicy = () => {
       "@type": "WebPage",
       "name": "Politique de Confidentialité - Kairos AI",
       "description": "Politique de confidentialité et de protection des données personnelles de Kairos AI. Transparence totale sur la collecte, l'utilisation et la protection de vos informations.",
-      "url": "https://kairos-ai.fr/politique-de-confidentialite",
+      "url": "https://www.kairos-ai.fr/politique-de-confidentialite",
       "isPartOf": {
         "@type": "WebSite",
         "name": "Kairos AI",
-        "url": "https://kairos-ai.fr"
+        "url": "https://www.kairos-ai.fr"
       },
       "datePublished": "2025-01-15",
       "dateModified": "2025-01-15",
@@ -56,13 +56,13 @@ const PrivacyPolicy = () => {
           "@type": "ListItem",
           "position": 1,
           "name": "Accueil",
-          "item": "https://kairos-ai.fr"
+          "item": "https://www.kairos-ai.fr"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Politique de Confidentialité",
-          "item": "https://kairos-ai.fr/politique-de-confidentialite"
+          "item": "https://www.kairos-ai.fr/politique-de-confidentialite"
         }
       ]
     }
@@ -117,7 +117,7 @@ const PrivacyPolicy = () => {
         title="Politique de Confidentialité | Kairos AI - Protection des Données Personnelles"
         description="Politique de confidentialité et de protection des données personnelles de Kairos AI. Transparence totale sur la collecte, l'utilisation et la protection de vos informations RGPD."
         keywords="politique confidentialité, protection données personnelles, RGPD, Kairos AI, privacy policy, données personnelles, consentement, droits utilisateurs"
-        canonicalUrl="https://kairos-ai.fr/politique-de-confidentialite"
+        canonicalUrl="https://www.kairos-ai.fr/politique-de-confidentialite"
         structuredData={structuredData}
       />
       
